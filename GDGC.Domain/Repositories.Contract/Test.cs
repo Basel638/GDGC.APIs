@@ -8,5 +8,6 @@ namespace GDGC.Domain.Repositories.Contract
 {
     internal class Test
     {
+        public int TestProp { get; set; }
     }
 }
