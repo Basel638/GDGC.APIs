@@ -12,6 +12,15 @@ namespace GDGC.Domain.Entities
 		public string ContentUrl { get; set; } // رابط الفيديو أو المادة
 		public DateTime SessionDate { get; set; }
 
-	}
+        public string MeetingLink { get; set; }
+
+        public bool IsActive { get; set; }
+
+
+        //public string InstructorName { get; set; }
+        //public string MentorName { get; set; }
+
+
+    }
 
 }

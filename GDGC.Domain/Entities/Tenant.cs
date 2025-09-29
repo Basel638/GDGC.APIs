@@ -10,7 +10,7 @@ namespace GDGC.Domain.Entities
 	{
 		public string Name { get; set; }
 		public string Slug { get; set; }
-		public string SchemaName { get; set; }
+		public string SchemaName { get; set; } // GDG Cairo
 		public string UniversityName { get; set; }
 		public string ContactEmail { get; set; }
 		public bool IsActive { get; set; } = true;

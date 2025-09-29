@@ -11,7 +11,9 @@ namespace GDGC.Domain.Entities
 		public string Name { get; set; } // Level 1, Level 2
 		public int Order { get; set; }   // ترتيب المستويات
 
-		
-	}
+        public string Description { get; set; }
+
+
+    }
 
 }

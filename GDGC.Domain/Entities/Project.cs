@@ -11,8 +11,11 @@ namespace GDGC.Domain.Entities
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public DateTime Deadline { get; set; }
+        public string ProjectUrl { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-		
-	}
+
+
+    }
 
 }

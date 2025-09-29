@@ -15,7 +15,7 @@ namespace GDGC.Domain.Entities
 		male
 	}
 
-	public class User
+	public class User /*: IdentityUser*/
 	{
 		public string FullName { get; set; }
 		public bool IsActive { get; set; } = true;
