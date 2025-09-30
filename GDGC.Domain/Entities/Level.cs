@@ -13,6 +13,9 @@ namespace GDGC.Domain.Entities
 
         public string Description { get; set; }
 
+        public int TrackId { get; set; }	
+        public Track Track { get; set; }
+
 
     }
 

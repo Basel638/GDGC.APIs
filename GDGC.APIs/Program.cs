@@ -1,4 +1,7 @@
 
+using GDGC.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 namespace GDGC.APIs
 {
 	public class Program
@@ -13,7 +16,11 @@ namespace GDGC.APIs
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
-
+			
+			builder.Services.AddDbContext<GdgContext>(Options =>
+			{
+				Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+			});
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
@@ -22,6 +29,7 @@ namespace GDGC.APIs
 				app.UseSwagger();
 				app.UseSwaggerUI();
 			}
+
 
 			app.UseHttpsRedirection();
 
