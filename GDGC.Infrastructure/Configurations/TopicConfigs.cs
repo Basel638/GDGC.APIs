@@ -16,9 +16,13 @@ namespace GDGC.Infrastructure.Configurations
 			builder.HasOne(T => T.Level)
 				.WithMany()
 				.HasForeignKey(T => T.LevelId)
-				.OnDelete(DeleteBehavior.Cascade);
+				.OnDelete(DeleteBehavior.NoAction);
 
-			
-		}
-	}
+            // Relationship Between Topic and Session
+            builder.HasMany(T => T.Sessions)
+                .WithOne(S => S.Topic)
+                .HasForeignKey(S => S.TopicId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+    }
 }

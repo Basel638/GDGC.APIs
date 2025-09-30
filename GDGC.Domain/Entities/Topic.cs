@@ -15,6 +15,8 @@ namespace GDGC.Domain.Entities
         public int LevelId { get; set; }
         public Level Level { get; set; }
 
+        public ICollection<Session> Sessions { get; set; } = new HashSet<Session>();
+
     }
 
 }

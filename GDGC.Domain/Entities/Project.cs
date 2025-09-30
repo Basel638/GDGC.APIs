@@ -13,9 +13,6 @@ namespace GDGC.Domain.Entities
 		public DateTime Deadline { get; set; }
         public string ProjectUrl { get; set; }
         public DateTime CreatedAt { get; set; }
-
-
-
     }
 
 }

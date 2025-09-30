@@ -1,4 +1,3 @@
-
 using GDGC.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
