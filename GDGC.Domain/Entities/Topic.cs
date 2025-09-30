@@ -12,7 +12,9 @@ namespace GDGC.Domain.Entities
 		public string Title { get; set; }
 		public string Description { get; set; }
 
-		
-	}
+        public int LevelId { get; set; }
+        public Level Level { get; set; }
+
+    }
 
 }

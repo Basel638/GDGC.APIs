@@ -17,7 +17,8 @@ namespace GDGC.Domain.Entities
 
 	public class User /*: IdentityUser*/
 	{
-		public string FullName { get; set; }
+        public int UserId { get; set; }
+        public string FullName { get; set; }
 		public bool IsActive { get; set; } = true;
 		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
