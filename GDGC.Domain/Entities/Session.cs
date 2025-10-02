@@ -15,7 +15,8 @@ namespace GDGC.Domain.Entities
         public string MeetingLink { get; set; }
 
         public bool IsActive { get; set; }
-
+        public int TopicId { get; set; }
+        public Topic Topic { get; set; }
 
         //public string InstructorName { get; set; }
         //public string MentorName { get; set; }

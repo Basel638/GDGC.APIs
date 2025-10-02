@@ -30,6 +30,11 @@ namespace GDGC.Infrastructure
         public DbSet<ExamAttemption> ExamAttemptions { get; set; }
         public DbSet<ProjectAttemption> ProjectAttemptions { get; set; }
         public DbSet<StudentSessionsPerTrack> StudentSessionsPerTrack { get; set; }
+
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<AssignmentSubmitions> AssignmentSubmitions { get; set; }
+        public DbSet<StudentTrack> StudentTracks{ get; set; }
+        public DbSet<StudentAttendSession> SessionAttendnces{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
