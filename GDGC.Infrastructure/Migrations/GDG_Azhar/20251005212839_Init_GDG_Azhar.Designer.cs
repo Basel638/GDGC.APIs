@@ -9,21 +9,84 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GDGC.Infrastructure.Migrations
+namespace GDGC.Infrastructure.Migrations.GDG_Azhar
 {
     [DbContext(typeof(GdgContext))]
-    [Migration("20250930004956_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251005212839_Init_GDG_Azhar")]
+    partial class Init_GDG_Azhar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GDGC.Domain.Entities.Assignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AssignmentUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalMarks")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assignments", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities.AssignmentSubmitions", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feedback")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObtainedMarks")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubmissionUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("StudentId", "AssignmentId");
+
+                    b.HasIndex("AssignmentId");
+
+                    b.ToTable("AssignmentSubmitions", "dbo");
+                });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Exam", b =>
                 {
@@ -52,7 +115,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exams");
+                    b.ToTable("Exams", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Level", b =>
@@ -81,7 +144,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Project", b =>
@@ -112,7 +175,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Session", b =>
@@ -141,9 +204,53 @@ namespace GDGC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Sessions");
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Sessions", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchemaName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniversityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Topic", b =>
@@ -169,7 +276,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Track", b =>
@@ -190,7 +297,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Tracks", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.User", b =>
@@ -227,7 +334,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.ExamAttemption", b =>
@@ -269,7 +376,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("ExamAttemptions");
+                    b.ToTable("ExamAttemptions", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.ProjectAttemption", b =>
@@ -312,7 +419,38 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectAttemptions");
+                    b.ToTable("ProjectAttemptions", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentAttendSession", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AttendedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("AttendedSession")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "SessionId");
+
+                    b.HasIndex("LevelId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("SessionAttendnces", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentSessionsPerTrack", b =>
@@ -332,7 +470,53 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("StudentSessionsPerTrack");
+                    b.ToTable("StudentSessionsPerTrack", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentTrack", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrackId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EnrolledAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastLevel")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "TrackId");
+
+                    b.HasIndex("TrackId");
+
+                    b.ToTable("StudentTracks", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities.AssignmentSubmitions", b =>
+                {
+                    b.HasOne("GDGC.Domain.Entities.Assignment", "Assignment")
+                        .WithMany()
+                        .HasForeignKey("AssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GDGC.Domain.Entities.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Assignment");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Level", b =>
@@ -346,12 +530,23 @@ namespace GDGC.Infrastructure.Migrations
                     b.Navigation("Track");
                 });
 
+            modelBuilder.Entity("GDGC.Domain.Entities.Session", b =>
+                {
+                    b.HasOne("GDGC.Domain.Entities.Topic", "Topic")
+                        .WithMany("Sessions")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Topic");
+                });
+
             modelBuilder.Entity("GDGC.Domain.Entities.Topic", b =>
                 {
                     b.HasOne("GDGC.Domain.Entities.Level", "Level")
                         .WithMany()
                         .HasForeignKey("LevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Level");
@@ -411,6 +606,41 @@ namespace GDGC.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentAttendSession", b =>
+                {
+                    b.HasOne("GDGC.Domain.Entities.Level", "Level")
+                        .WithMany()
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GDGC.Domain.Entities.Session", "Session")
+                        .WithMany()
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GDGC.Domain.Entities.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GDGC.Domain.Entities.Topic", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Level");
+
+                    b.Navigation("Session");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Topic");
+                });
+
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentSessionsPerTrack", b =>
                 {
                     b.HasOne("GDGC.Domain.Entities.Session", "Session")
@@ -436,6 +666,30 @@ namespace GDGC.Infrastructure.Migrations
                     b.Navigation("Track");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentTrack", b =>
+                {
+                    b.HasOne("GDGC.Domain.Entities.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GDGC.Domain.Entities.Track", "Track")
+                        .WithMany()
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Track");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities.Topic", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

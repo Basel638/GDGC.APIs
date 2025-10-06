@@ -1,4 +1,6 @@
+using GDGC.Domain.Contracts;
 using GDGC.Infrastructure;
+using GDGC.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace GDGC.APIs
@@ -20,6 +22,9 @@ namespace GDGC.APIs
 			{
 				Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 			});
+
+			builder.Services.AddScoped(typeof(IServices), typeof(TenantProvisioningService));
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

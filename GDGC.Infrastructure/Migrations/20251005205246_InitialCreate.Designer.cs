@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GDGC.Infrastructure.Migrations
 {
     [DbContext(typeof(GdgContext))]
-    [Migration("20250930205140_AddSomeRelationships")]
-    partial class AddSomeRelationships
+    [Migration("20251005205246_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Assignments");
+                    b.ToTable("Assignments", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.AssignmentSubmitions", b =>
@@ -85,7 +85,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("AssignmentId");
 
-                    b.ToTable("AssignmentSubmitions");
+                    b.ToTable("AssignmentSubmitions", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Exam", b =>
@@ -115,7 +115,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exams");
+                    b.ToTable("Exams", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Level", b =>
@@ -144,7 +144,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Project", b =>
@@ -175,7 +175,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Session", b =>
@@ -211,7 +211,46 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Sessions");
+                    b.ToTable("Sessions", "dbo");
+                });
+
+            modelBuilder.Entity("GDGC.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchemaName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniversityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Topic", b =>
@@ -237,7 +276,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.Track", b =>
@@ -258,7 +297,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Tracks", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.User", b =>
@@ -295,7 +334,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.ExamAttemption", b =>
@@ -337,7 +376,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("ExamAttemptions");
+                    b.ToTable("ExamAttemptions", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.ProjectAttemption", b =>
@@ -380,7 +419,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectAttemptions");
+                    b.ToTable("ProjectAttemptions", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentAttendSession", b =>
@@ -411,7 +450,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("SessionAttendnces");
+                    b.ToTable("SessionAttendnces", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentSessionsPerTrack", b =>
@@ -431,7 +470,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("StudentSessionsPerTrack");
+                    b.ToTable("StudentSessionsPerTrack", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities._3___Relationships_Entities.StudentTrack", b =>
@@ -458,7 +497,7 @@ namespace GDGC.Infrastructure.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("StudentTracks");
+                    b.ToTable("StudentTracks", "dbo");
                 });
 
             modelBuilder.Entity("GDGC.Domain.Entities.AssignmentSubmitions", b =>

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GDGC.Domain\GDGC.Domain.csproj" />
+    <ProjectReference Include="..\GDGC.Infrastructure\GDGC.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
