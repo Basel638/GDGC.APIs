@@ -32,9 +32,7 @@ namespace GDGC.Infrastructure
         public DbSet<Project> Projects { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<Session> Sessions { get; set; }
-
         public DbSet<Topic> Topics { get; set; }
-
         public DbSet<ExamAttemption> ExamAttemptions { get; set; }
         public DbSet<ProjectAttemption> ProjectAttemptions { get; set; }
         public DbSet<StudentSessionsPerTrack> StudentSessionsPerTrack { get; set; }

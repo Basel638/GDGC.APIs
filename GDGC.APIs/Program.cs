@@ -7,7 +7,7 @@ namespace GDGC.APIs
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		public static async Task Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +25,30 @@ namespace GDGC.APIs
 
 			builder.Services.AddScoped(typeof(IServices), typeof(TenantProvisioningService));
 
-			var app = builder.Build();
+            var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
+
+            #region Update database and Log Exceptopns using [ILoggerFactory]
+
+            using var scope = app.Services.CreateScope(); 
+            var services = scope.ServiceProvider; 
+            var _dbContext = services.GetRequiredService<GdgContext>();
+            // Ask CLR FOR Creating Objects From DbContex
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>(); // for Log Exceptions at Console
+            var logger = loggerFactory.CreateLogger<Program>();
+            try
+            {
+                await _dbContext.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred during migration");
+            }
+
+            #endregion
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
 				app.UseSwaggerUI();
