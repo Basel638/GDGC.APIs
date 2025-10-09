@@ -47,7 +47,7 @@ namespace GDGC.Infrastructure
 
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-			modelBuilder.HasDefaultSchema(null);
+			//modelBuilder.HasDefaultSchema(null);
 			//modelBuilder.HasDefaultSchema(_schema);
 			foreach (var entity in modelBuilder.Model.GetEntityTypes())
 			{
